@@ -1,0 +1,6 @@
+.parallax-element {
+  will-change: transform;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  position: relative;
+} 

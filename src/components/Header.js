@@ -41,7 +41,7 @@ const Header = ({ title = 'Your Name' }) => {
   // Handle scroll to detect active section
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['about', 'skills', 'projects', 'contact'];
+      const sections = ['about', 'projects', 'contact'];
       const scrollPosition = window.scrollY + 100; // Offset for better UX
 
       for (const section of sections) {
@@ -107,15 +107,6 @@ const Header = ({ title = 'Your Name' }) => {
                 onClick={(e) => scrollToSection(e, 'about')}
               >
                 Giới thiệu
-              </a>
-            </li>
-            <li>
-              <a 
-                href="#skills" 
-                className={activeSection === 'skills' ? 'active' : ''}
-                onClick={(e) => scrollToSection(e, 'skills')}
-              >
-                Kỹ năng
               </a>
             </li>
             <li>
