@@ -13,14 +13,9 @@ function App() {
 
   return (
     <div className="App">
-      <Header title="Your Name" />
+      <Header />
       <main className="main-content">
-        <ParallaxHero
-          name="Your Name"
-          title="Fullstack Developer"
-          description="Tôi là một lập trình viên Fullstack với kinh nghiệm trong việc phát triển ứng dụng web sử dụng React và Node.js. Tôi đam mê tạo ra các ứng dụng web hiện đại, hiệu quả và dễ sử dụng."
-          imageUrl="https://via.placeholder.com/400x400"
-        />
+        <ParallaxHero />
         <Projects />
         <Contact />
       </main>

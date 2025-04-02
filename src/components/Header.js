@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './Header.css';
+import GlassCard from './GlassCard';
 
-const Header = ({ title = 'Your Name' }) => {
+const Header = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [activeSection, setActiveSection] = useState('about');
+  const [activeSection, setActiveSection] = useState('gioi-thieu');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   // Toggle dark mode
   const toggleDarkMode = () => {
@@ -24,6 +26,22 @@ const Header = ({ title = 'Your Name' }) => {
     }
   }, []);
 
+  // Detect scroll for header transparency
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   // Close mobile menu when resizing to desktop
   useEffect(() => {
     const handleResize = () => {
@@ -41,7 +59,7 @@ const Header = ({ title = 'Your Name' }) => {
   // Handle scroll to detect active section
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['about', 'projects', 'contact'];
+      const sections = ['gioi-thieu', 'du-an', 'lien-he'];
       const scrollPosition = window.scrollY + 100; // Offset for better UX
 
       for (const section of sections) {
@@ -86,53 +104,59 @@ const Header = ({ title = 'Your Name' }) => {
   };
 
   return (
-    <header className={`header ${isDarkMode ? 'dark-mode' : ''}`}>
-      <div className="header-content">
-        <div className="logo">
-          <h1>{title}</h1>
+    <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
+      <GlassCard 
+        className="header-glass" 
+        blur={isScrolled ? 8 : 4} 
+        opacity={isScrolled ? 0.2 : 0.1}
+      >
+        <div className="header-content">
+          {/* <div className="logo">
+            <h1>Thanh</h1>
+          </div> */}
+          <button 
+            className="mobile-menu-button" 
+            onClick={toggleMobileMenu}
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? '✕' : '☰'}
+          </button>
+          <nav className={`nav-menu ${isMobileMenuOpen ? 'active' : ''}`}>
+            <ul>
+              <li>
+                <a 
+                  href="#gioi-thieu" 
+                  className={activeSection === 'gioi-thieu' ? 'active' : ''}
+                  onClick={(e) => scrollToSection(e, 'gioi-thieu')}
+                >
+                  Giới thiệu
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="#du-an" 
+                  className={activeSection === 'du-an' ? 'active' : ''}
+                  onClick={(e) => scrollToSection(e, 'du-an')}
+                >
+                  Dự án
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="#lien-he" 
+                  className={activeSection === 'lien-he' ? 'active' : ''}
+                  onClick={(e) => scrollToSection(e, 'lien-he')}
+                >
+                  Liên hệ
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <button className="theme-toggle" onClick={toggleDarkMode}>
+            {isDarkMode ? '☀️' : '🌙'}
+          </button>
         </div>
-        <button 
-          className="mobile-menu-button" 
-          onClick={toggleMobileMenu}
-          aria-label="Toggle menu"
-        >
-          {isMobileMenuOpen ? '✕' : '☰'}
-        </button>
-        <nav className={`nav-menu ${isMobileMenuOpen ? 'active' : ''}`}>
-          <ul>
-            <li>
-              <a 
-                href="#about" 
-                className={activeSection === 'about' ? 'active' : ''}
-                onClick={(e) => scrollToSection(e, 'about')}
-              >
-                Giới thiệu
-              </a>
-            </li>
-            <li>
-              <a 
-                href="#projects" 
-                className={activeSection === 'projects' ? 'active' : ''}
-                onClick={(e) => scrollToSection(e, 'projects')}
-              >
-                Dự án
-              </a>
-            </li>
-            <li>
-              <a 
-                href="#contact" 
-                className={activeSection === 'contact' ? 'active' : ''}
-                onClick={(e) => scrollToSection(e, 'contact')}
-              >
-                Liên hệ
-              </a>
-            </li>
-          </ul>
-        </nav>
-        <button className="theme-toggle" onClick={toggleDarkMode}>
-          {isDarkMode ? '☀️' : '🌙'}
-        </button>
-      </div>
+      </GlassCard>
     </header>
   );
 };

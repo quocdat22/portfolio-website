@@ -1,0 +1,50 @@
+.neu-card {
+  position: relative;
+  background: #f0f0f3;
+  border-radius: 15px;
+  padding: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 
+    var(--depth) var(--depth) calc(var(--depth) * 2) rgba(0, 0, 0, 0.1),
+    calc(var(--depth) * -1) calc(var(--depth) * -1) calc(var(--depth) * 2) rgba(255, 255, 255, 0.7);
+  margin-bottom: 1rem;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.neu-card:hover {
+  box-shadow: 
+    calc(var(--depth) * 0.7) calc(var(--depth) * 0.7) calc(var(--depth) * 1.5) rgba(0, 0, 0, 0.1),
+    calc(var(--depth) * -0.7) calc(var(--depth) * -0.7) calc(var(--depth) * 1.5) rgba(255, 255, 255, 0.7);
+  transform: translateY(-5px);
+}
+
+.neu-card.pressed {
+  background: #f0f0f3;
+  box-shadow: 
+    inset var(--depth) var(--depth) calc(var(--depth) * 2) rgba(0, 0, 0, 0.1),
+    inset calc(var(--depth) * -1) calc(var(--depth) * -1) calc(var(--depth) * 2) rgba(255, 255, 255, 0.7);
+}
+
+/* Dark mode adjustments */
+.dark-mode .neu-card {
+  background: #2c2c2e;
+  box-shadow: 
+    var(--depth) var(--depth) calc(var(--depth) * 2) rgba(0, 0, 0, 0.5),
+    calc(var(--depth) * -1) calc(var(--depth) * -1) calc(var(--depth) * 2) rgba(70, 70, 70, 0.3);
+}
+
+.dark-mode .neu-card:hover {
+  box-shadow: 
+    calc(var(--depth) * 0.7) calc(var(--depth) * 0.7) calc(var(--depth) * 1.5) rgba(0, 0, 0, 0.5),
+    calc(var(--depth) * -0.7) calc(var(--depth) * -0.7) calc(var(--depth) * 1.5) rgba(70, 70, 70, 0.3);
+}
+
+.dark-mode .neu-card.pressed {
+  background: #2c2c2e;
+  box-shadow: 
+    inset var(--depth) var(--depth) calc(var(--depth) * 2) rgba(0, 0, 0, 0.5),
+    inset calc(var(--depth) * -1) calc(var(--depth) * -1) calc(var(--depth) * 2) rgba(70, 70, 70, 0.3);
+} 
